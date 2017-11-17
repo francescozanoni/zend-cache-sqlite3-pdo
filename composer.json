@@ -9,8 +9,8 @@
       "email": "francescozanoni81@gmail.com"
     }
   ],
+  "license": "MIT",
   "require": {
-    "php": ">=5.4",
     "ext-pdo": "*",
     "zendframework/zendframework1": "^1.12"
   },
