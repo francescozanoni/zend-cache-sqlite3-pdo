@@ -1,0 +1,25 @@
+{
+  "name": "francescozanoni/zend-cache-sqlite3-pdo",
+  "description": "SQLite 3 cache engine for Zend Framework 1, based on PDO driver",
+  "version": "1.0.0",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Francesco Zanoni",
+      "email": "francescozanoni81@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "ext-pdo": "*",
+    "zendframework/zendframework1": "^1.12"
+  },
+  "autoload": {
+    "psr-0": {
+      "Zend_": "src/"
+    }
+  },
+  "include-path": [
+    "src/"
+  ]
+}
