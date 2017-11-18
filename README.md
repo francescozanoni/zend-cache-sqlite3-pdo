@@ -10,16 +10,22 @@
 
 ## How to use
 
-1. add this package to your dependencies:
-   ```
+1. add this package to your project dependencies:
+   ```bash
    composer require francescozanoni/zend-cache-sqlite3-pdo
    ```
        
-1. customize your **application.ini** file with the following lines:
-   ```
+1. customize **application.ini** file:
+   ```ini
    resources.cachemanager.useragents.backend.name = Sqlite3
+   resources.cachemanager.useragents.backend.options.cache_db_complete_path = "/path/to/cache.sqlite"
    ```
 
+1. create cache database file and make it writable by web user:
+    ```bash
+    touch /path/to/cache.sqlite
+    chmod 777 /path/to/cache.sqlite
+    ```
 
 ## History
 
