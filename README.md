@@ -3,8 +3,9 @@
 
 ## Purposes
 
-1. add SQLite 3 cache engine to Zend Framework 1, besides the already available engines: File, SQLite (2), etc.
-1. provide it as Composer package, ready to install and use
+1. add SQLite 3-based cache engine to Zend Framework 1, besides the default SQLite 2 engine
+1. provide it as Composer package, with specific requirements and fully automated installation
+1. integrate with official Zend Framework 1 package
 
 
 ## How to use
@@ -17,18 +18,16 @@
 1. customize your **application.ini** file with the following lines:
    ```
    resources.cachemanager.useragents.backend.name = Sqlite3
-   resources.cachemanager.useragents.backend.options.cache_db_complete_path = "/path/to/cache.sqlite"
    ```
+
 
 ## History
 
-The engine code (src/Zend/Cache/Backend/Sqlite3.php) is taken from repository [gencer/zend-cache-sqlite3](https://github.com/gencer/zend-cache-sqlite3) as-is, I've only wrapped it into a Composer-compliant file/folder structure.
+1. [gencer/zend-cache-sqlite3](https://github.com/gencer/zend-cache-sqlite3) started the project, with instructions on how to manually copy and paste the code to the suitable Zend Framework's subfolder. PDO and native driver versions are provided together.
 
-[gencer/zend-cache-sqlite3](https://github.com/gencer/zend-cache-sqlite3) does not handle the code automatically: copying and pasting the code to the suitable Zend Framework's subfolder is up to the user. This repository also provides PDO and native driver versions together.
+1. [tttptd/zend-cache-sqlite3](https://github.com/tttptd/zend-cache-sqlite3) added a basic Composer-compliant structure, but left the manual installation and the two versions together.
 
-[tttptd/zend-cache-sqlite3](https://github.com/tttptd/zend-cache-sqlite3) added a basic composer.json file, but left the manual installation procedure described by [gencer/zend-cache-sqlite3](https://github.com/gencer/zend-cache-sqlite3) and the two versions together.
-
-I've split the original package into two different packages: this one and [francescozanoni/zend-cache-sqlite3-native](https://github.com/francescozanoni/zend-cache-sqlite3-native), in order to let the final user choose and handle requirements accordingly.
+1. I've added the official Zend Framework 1 package as requirement and split the original package into two different packages: this one and [francescozanoni/zend-cache-sqlite3-native](https://github.com/francescozanoni/zend-cache-sqlite3-native), in order to let the final user choose and handle requirements accordingly. The engine code (src/Zend/Cache/Backend/Sqlite3.php) was taken as-is from the mentioned repositories, I've only wrapped it into a Composer-compliant file/folder structure.
 
 
 ## References
@@ -36,3 +35,4 @@ I've split the original package into two different packages: this one and [franc
   * https://framework.zend.com/manual/1.12/en/zend.cache.html
   * https://github.com/gencer/zend-cache-sqlite3
   * https://github.com/tttptd/zend-cache-sqlite3
+  * https://github.com/francescozanoni/zend-cache-sqlite3-native
