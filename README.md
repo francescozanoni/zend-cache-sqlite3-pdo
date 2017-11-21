@@ -14,18 +14,30 @@
    ```bash
    composer require francescozanoni/zend-cache-sqlite3-pdo
    ```
-       
 1. customize **application.ini** file:
    ```ini
    resources.cachemanager.<cache_name>.backend.name = Sqlite3
    resources.cachemanager.<cache_name>.backend.options.cache_db_complete_path = "/path/to/cache.sqlite"
    ```
-
 1. create cache database file and make it writable by web user (tables are created automatically by the engine itself):
     ```bash
     touch /path/to/cache.sqlite
     chmod 777 /path/to/cache.sqlite
     ```
+
+
+## How to test
+
+- on Unix/Linux:
+   ```bash
+   cd /path/to/zend-cache-sqlite3-pdo
+   vendor/bin/phpunit test
+   ```
+- on Windows:
+   ```bash
+   cd \path\to\zend-cache-sqlite3-pdo
+   vendor\bin\phpunit.bat test
+   ```
 
 
 ## History
