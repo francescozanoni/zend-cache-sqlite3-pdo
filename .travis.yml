@@ -6,4 +6,4 @@ php:
   - '7.0'
   - '7.1'
 install: composer install
-script: phpunit
+script: phpunit test
