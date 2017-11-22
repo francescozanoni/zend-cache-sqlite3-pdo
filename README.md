@@ -1,4 +1,4 @@
-# SQLite 3 cache engine for Zend Framework 1 (PDO driver)
+# SQLite 3 cache engine for Zend Framework 1 (PDO driver) [![Build Status](https://travis-ci.org/francescozanoni/zend-cache-sqlite3-pdo.svg?branch=master)](https://travis-ci.org/francescozanoni/zend-cache-sqlite3-pdo)
 
 
 ## Purposes
