@@ -7,3 +7,7 @@ php:
   - '7.1'
 install: composer install
 script: phpunit test
+matrix:
+  include:
+    - php: 5.3
+      dist: precise
