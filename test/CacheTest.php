@@ -1,18 +1,27 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+define('APPLICATION_PATH', __DIR__);
 
 class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
 
-    protected $cacheFilePath = __DIR__ . '/database/cache.sqlite';
-
+    protected $cacheFilePath;
+    protected $cacheName;
+    
     public function setUp()
     {
     
         $this->bootstrap = new Zend_Application(
             'testing',
-            __DIR__ . '/application.ini'
+            APPLICATION_PATH . '/application.ini'
         );
+        
+        // Cache name and cache file path are extracted from application.ini,
+        // in order to make them available to all test methods.
+        $config = $this->bootstrap->getOptions();
+        $cacheNames = array_keys($config['resources']['cachemanager']);
+        $this->cacheName = $cacheNames[0];
+        $this->cacheFilePath = $config['resources']['cachemanager'][$this->cacheName]['backend']['options']['cache_db_complete_path'];
         
         parent::setUp();
         
@@ -21,10 +30,10 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function tearDown()
     {
     
-        parent:: tearDown();
+        parent::tearDown();
         
         if (file_exists($this->cacheFilePath) === true) {
-            unlink($this-> cacheFilePath);
+            unlink($this->cacheFilePath);
         }
         
     }
@@ -37,11 +46,11 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function testCacheFilePathExistence()
     {
     
-        $this->assertFileNotExists($this-> cacheFilePath);
+        $this->assertFileNotExists($this->cacheFilePath);
 
         $this->_getCache();
 
-        $this->assertFileExists($this-> cacheFilePath);
+        $this->assertFileExists($this->cacheFilePath);
         
     }
     
@@ -75,7 +84,8 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
 
     /**
-     * Ensure trying to cache an uncacheable value throws a Zend_Cache_Exception.
+     * Ensure trying to cache an uncacheable value
+     * throws a Zend_Cache_Exception.
      */
     public function testUncacheableItem()
     {
@@ -108,7 +118,7 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
             ->getBootstrap()
             ->getPluginResource('cachemanager')
             ->getCacheManager()
-            ->getCache('cachename');
+            ->getCache($this->cacheName);
 
     }
 
