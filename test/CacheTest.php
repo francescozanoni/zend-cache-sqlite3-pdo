@@ -4,22 +4,53 @@ require_once __DIR__ . '/../vendor/autoload.php';
 class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
 
+    protected $cacheFilePath = __DIR__ . '/database/cache.sqlite';
+
     public function setUp()
     {
-        // Assign and instantiate in one step:
+    
         $this->bootstrap = new Zend_Application(
             'testing',
             __DIR__ . '/application.ini'
         );
+        
         parent::setUp();
+        
+    }
+    
+    public function tearDown()
+    {
+    
+        parent:: tearDown();
+        
+        if (file_exists($this->cacheFilePath) === true) {
+            unlink($this-> cacheFilePath);
+        }
+        
     }
 
+    /**
+     * Ensure cache database file path
+     * does not exist before usage
+     * and exists after usage.
+     */
+    public function testCacheFilePathExistence()
+    {
+    
+        $this->assertFileNotExists($this-> cacheFilePath);
+
+        $this->_getCache();
+
+        $this->assertFileExists($this-> cacheFilePath);
+        
+    }
+    
     /**
      * Ensure an uncached item is not available.
      */
     public function testUncachedItem()
     {
-
+        
         $cache = $this->_getCache();
 
         $uncachedItemValue = $cache->load('uncached_item_key');
@@ -33,7 +64,7 @@ class CacheTest extends Zend_Test_PHPUnit_ControllerTestCase
      */
     public function testCachedItem()
     {
-
+        
         $cache = $this->_getCache();
 
         $cache->save('cached_item_value', 'cached_item_key');
